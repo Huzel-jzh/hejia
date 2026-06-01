@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="description" content="禾家宠物生活店 | 杭州萧山宠物寄养，家庭式守护，每日视频反馈，宽敞环境，安心托管毛孩子。">
+    <title>禾家宠物生活店 | 给毛孩子温暖的家</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 主色调调色板 — 更柔和暖萌 */
+        :root {
+            --primary: #F59A4A;
+            --primary-light: #FFB77C;
+            --primary-deep: #E27C2E;
+            --bg-warm: #FFF6F0;
+            --card-white: #FFFFFF;
+            --gray-soft: #FDF8F4;
+            --text-dark: #2E2A27;
+            --text-mid: #7A6E64;
+            --text-light: #B3A299;
+            --accent-mint: #9BC48F;
+            --accent-mint-dark: #7FAB70;
+            --shadow-soft: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+            --shadow-glow: 0 20px 30px -12px rgba(245,154,74,0.2);
+            --radius-card: 28px;
+            --radius-sm: 18px;
+            --radius-btn: 50px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FFF0E6 0%, #FEE9E0 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', Roboto, 'Noto Sans', sans-serif;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            line-height: 1.45;
+        }
+
+        /* 波浪装饰 */
+        .wave-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23FFF2EA" fill-opacity="0.7" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,138.7C672,128,768,128,864,149.3C960,171,1056,213,1152,213.3C1248,213,1344,171,1392,149.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 20px 110px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-modern {
+            background: var(--card-white);
+            border-radius: var(--radius-card);
+            padding: 24px 22px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(245, 154, 74, 0.12);
+        }
+        .card-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: 1.7rem;
+            font-weight: 640;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #E27C2E, #F8AD6B);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-left: 5px solid var(--primary);
+            padding-left: 16px;
+        }
+        .section-header span {
+            font-size: 1.8rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin: 12px 0 10px 0;
+            padding: 16px 0 8px;
+        }
+        .logo-wrapper {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 12px;
+            background: #FFF6ED;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 24px rgba(226,124,46,0.12);
+            overflow: hidden;
+        }
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .shop-name {
+            font-size: 2rem;
+            font-weight: 720;
+            background: linear-gradient(125deg, #E57C2C, #FAB27B);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 14px 0 6px;
+            box-shadow: 0 6px 12px rgba(245,154,74,0.3);
+        }
+
+        .address-glass {
+            background: rgba(255, 248, 240, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 80px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,240,0.8);
+            box-shadow: var(--shadow-soft);
+        }
+        .address-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+        .map-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+        }
+        .map-btn:active { background: var(--primary-deep); transform: scale(0.96); }
+
+        .price-card {
+            background: linear-gradient(115deg, #FFFFFF 0%, #FFF9F2 100%);
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+        }
+        .price-big {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+        .price-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-deep);
+            line-height: 1;
+        }
+        .price-unit {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-mid);
+        }
+        .price-discount {
+            background: #FCEADB;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .fee-note {
+            margin-top: 16px;
+            background: #FEF4EA;
+            border-radius: 22px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+        }
+
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .facility-item {
+            background: #FEF9F2;
+            border-radius: 24px;
+            padding: 12px 6px;
+            text-align: center;
+            font-weight: 530;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            border: 1px solid #FFE8DA;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .facility-item:active { transform: scale(0.97); background: #FFEEDD; }
+
+        .service-list-modern {
+            list-style: none;
+        }
+        .service-list-modern li {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #FFEDE2;
+        }
+        .service-icon {
+            font-size: 1.5rem;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        .notice-container {
+            background: #FFF5ED;
+            border-radius: 28px;
+            padding: 8px 0;
+        }
+        .notice-item {
+            padding: 12px 18px;
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            border-bottom: 1px solid #FFE0CE;
+        }
+        .notice-item:last-child { border-bottom: none; }
+
+        .welfare-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .welfare-tiers {
+            background: linear-gradient(105deg, #FFFBF5, #FFF5EA);
+            border-radius: 28px;
+            padding: 20px;
+            border-left: 8px solid var(--primary);
+        }
+        .tier-header {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .tier-badge-new {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 30px;
+            padding: 4px 14px;
+        }
+        .perk-list-clean {
+            list-style: none;
+            padding-left: 6px;
+        }
+        .perk-list-clean li {
+            margin: 10px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .single-perk-card {
+            background: white;
+            border-radius: 22px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #FFE1CF;
+        }
+
+        .photo-show {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .photo-card {
+            aspect-ratio: 1 / 1;
+            background: #ECD9CC;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.3rem;
+            color: #7C5D4C;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+        .photo-card span {
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 40px;
+            margin-top: 10px;
+        }
+        .photo-card:active { transform: scale(0.96); }
+
+        .contact-line-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+            border-bottom: 1px solid #FFE6DA;
+        }
+        .copy-mini-btn {
+            background: #F1E4D9;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .copy-mini-btn:active { background: #E2CFBF; transform: scale(0.96);}
+        .phone-link-styled {
+            font-weight: 600;
+            color: var(--primary-deep);
+            text-decoration: none;
+            background: #FEF2E8;
+            padding: 6px 18px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 252, 248, 0.96);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(245,154,74,0.25);
+            padding: 12px 20px 22px;
+            display: flex;
+            gap: 14px;
+            z-index: 200;
+            box-shadow: 0 -6px 20px rgba(0,0,0,0.04);
+        }
+        .bottom-btn {
+            flex: 1;
+            background: white;
+            border: 1px solid var(--primary);
+            border-radius: 60px;
+            padding: 14px 0;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--primary-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .bottom-btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 12px rgba(245,154,74,0.4);
+        }
+        .bottom-btn:active { transform: scale(0.96); }
+
+        .custom-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: #2E2A27e6;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            z-index: 300;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .custom-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+        .qr-img-hover {
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 20px;
+            padding: 16px 0 10px;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px 110px 16px; }
+            .shop-name { font-size: 1.7rem; }
+            .price-number { font-size: 2.8rem; }
+            .section-header { font-size: 1.4rem; }
+        }
+
+        /* 地图选择弹窗 简约漂亮 */
+        .map-modal-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 400;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+        .map-modal-mask.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .map-modal-card {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 32px 32px 0 0;
+            padding: 24px 20px 36px;
+            box-shadow: 0 -8px 30px rgba(0,0,0,0.15);
+            animation: slideUp 0.25s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .map-modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-deep);
+        }
+        .map-option {
+            background: #FFF7F0;
+            border-radius: 60px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.2s;
+            border: 1px solid #FFE3D4;
+            cursor: pointer;
+        }
+        .map-option:active {
+            background: #FFEADB;
+            transform: scale(0.98);
+        }
+        .map-option span:first-child {
+            font-size: 1.6rem;
+        }
+        .close-map-btn {
+            background: #F1E4D9;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 10px;
+            color: #7A6E64;
+        }
+
+        /* ---------- 图片预览模态框 (流畅弹窗) ---------- */
+        .image-viewer-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.25s ease, opacity 0.25s ease, backdrop-filter 0.25s ease;
+        }
+        .image-viewer-mask.active {
+            visibility: visible;
+            opacity: 1;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+        }
+        .viewer-card {
+            max-width: 88vw;
+            max-height: 80vh;
+            background: transparent;
+            border-radius: 36px;
+            overflow: hidden;
+            position: relative;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+        }
+        .image-viewer-mask.active .viewer-card {
+            transform: scale(1);
+        }
+        .viewer-img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            display: block;
+            background: #2E2A27;
+            border-radius: 28px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+        }
+        .viewer-title {
+            text-align: center;
+            margin-top: 16px;
+            color: white;
+            font-weight: 500;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            width: auto;
+            padding: 8px 24px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .close-viewer {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+        }
+        .close-viewer:active {
+            transform: scale(0.92);
+            background: rgba(0,0,0,0.8);
+        }
+        .viewer-footer {
+            text-align: center;
+            margin-top: 12px;
+        }
+        @media (max-width: 560px) {
+            .close-viewer {
+                top: 4px;
+                right: 4px;
+                width: 38px;
+                height: 38px;
+                font-size: 20px;
+            }
+            .viewer-title {
+                font-size: 0.8rem;
+                margin-top: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wave-top"></div>
+<div class="container">
+    <div class="hero-section">
+        <div class="logo-wrapper">
+            <img src="https://img.cdn1.vip/i/6a1040ca787af_1779450058.webp" alt="禾家宠物" onerror="this.parentElement.innerHTML='🐾🏠'; this.style.display='none';">
+        </div>
+        <h1 class="shop-name">禾家宠物生活店</h1>
+        <div class="hero-badge">🏡 家庭式寄养 · 贴心守护</div>
+        <p style="margin-top: 12px; color: var(--text-mid);">每日视频陪伴 · 如家般温暖 · 限时无忧入住</p>
+    </div>
+
+    <!-- 地址导航条 — 自定义地图选择器 -->
+    <div class="address-glass">
+        <div class="address-text">📍 杭州萧山天润中心二幢301高层</div>
+        <button id="openMapSelectorBtn" class="map-btn">🗺️ 一键导航</button>
+    </div>
+
+    <!-- 收费标准 -->
+    <div class="card-modern price-card">
+        <div class="price-big">
+            <span class="price-number">88</span><span class="price-unit">元/天</span>
+        </div>
+        <div class="price-discount">🐱 自带粮减8元/天</div>
+        <div class="fee-note" style="width:100%">
+            📌 费用入住预付，离店结清 · 节假日定金留位<br>
+            🐈 猫咪到新环境先隔离2-3天适应，后可散养
+        </div>
+    </div>
+
+    <!-- 环境设施 (点击词条弹出实景照片) -->
+    <div class="section-header"><span>🏡</span> 环境设施 · 点击查看实景</div>
+    <div class="facility-grid" id="facilityGrid">
+        <div class="facility-item">🛋️ 宽敞客厅</div><div class="facility-item">🛏️ 独立休息室</div>
+        <div class="facility-item">❄️ 24h空调+净化器</div><div class="facility-item">☀️ 阳光晒太阳区</div>
+        <div class="facility-item">🎮 猫爬架/玩具</div><div class="facility-item">📹 24小时陪护</div>
+        <div class="facility-item">🧹 每日消毒通风</div><div class="facility-item">🏞️ 多房间分区</div>
+    </div>
+
+    <!-- 宠物服务 -->
+    <div class="section-header"><span>🐾</span> 宠物服务</div>
+    <div class="card-modern">
+        <ul class="service-list-modern">
+            <li><span class="service-icon">🧹</span> 每日至少两次卫生清理 + 猫砂/犬厕消毒</li>
+            <li><span class="service-icon">🍽️</span> 定时定量喂食，可遵循家长定制单</li>
+            <li><span class="service-icon">📱</span> 工作时间发送互动视频，及时反馈毛孩子状态</li>
+            <li><span class="service-icon">✂️</span> 基础护理：梳毛/擦眼耳/剪指甲（视性格而定）</li>
+            <li><span class="service-icon">🚿</span> 房间每日紫外线+宠物专用消毒液清洁</li>
+        </ul>
+    </div>
+
+    <!-- 入住须知 -->
+    <div class="section-header"><span>⚠️</span> 入住须知</div>
+    <div class="card-modern notice-container">
+        <div class="notice-item"><span>🚫</span> <strong>拒接：</strong>凶猫、孕猫、老年猫、三月龄以下小奶猫</div>
+        <div class="notice-item"><span>🐕</span> <strong>犬只接收：</strong>暂时只接收小型犬，根据习惯安排遛狗次数</div>
+        <div class="notice-item"><span>💊</span> <strong>驱虫：</strong>如需驱虫服务请提前告知</div>
+        <div class="notice-item"><span>⏰</span> <strong>超时说明：</strong>超时未接（三天内）且未续费视为弃养，将协助寻找领养家庭</div>
+    </div>
+
+    <!-- 消费臻享福利 -->
+    <div class="section-header"><span>🎁</span> 消费臻享福利</div>
+    <div class="welfare-wrapper">
+        <div class="welfare-tiers">
+            <div class="tier-header">🏅 累计消费福利 <span class="tier-badge-new">长期有效</span></div>
+            <ul class="perk-list-clean">
+                <li>✅ 累计 488元 → 寄养95折 + 2次宠物写真打印</li>
+                <li>✅ 累计 1288元 → 寄养88折 + 5次写真 + 1次免费接送 + 节假日优先预约</li>
+                <li>✅ 累计 2888元 → 寄养8折 + 全年写真无限次 + 3次免费接送 + 专属铭牌 + 生日蛋糕 + 优先预约</li>
+            </ul>
+        </div>
+        <div class="welfare-tiers" style="border-left-color: #9BC48F;">
+            <div class="tier-header">✨ 单次消费福利</div>
+            <div class="single-perk-card">🎁 单次满388元 → 赠送宠物零食大礼包</div>
+            <div class="single-perk-card">🪄 单次满588元 → 加赠驱虫服务一次</div>
+            <div class="single-perk-card">💎 单次满1288元 → 清爽入住（精油SPA洗护+修毛）+ 专属铭牌</div>
+        </div>
+    </div>
+
+    <!-- 寄养环境实拍（点击卡片显示高清照片） -->
+    <div class="section-header"><span>📸</span> 寄养环境实拍 · 轻触查看</div>
+    <div class="photo-show" id="photoShowArea">
+        <div class="photo-card" data-scene="cat">🐈<span>猫咪单间</span></div>
+        <div class="photo-card" data-scene="dog">🐕<span>狗狗活动区</span></div>
+        <div class="photo-card" data-scene="living">🛋️<span>客厅公区</span></div>
+    </div>
+    <p style="font-size: 12px; text-align: center; margin-top: 8px; color: var(--text-mid);">✨ 店主实拍 · 每日消毒 · 一宠一舍 ✨</p>
+
+    <!-- 联系卡片 -->
+    <div class="section-header"><span>📞</span> 立即预约 · 贴心咨询</div>
+    <div class="card-modern">
+        <div class="contact-line-item">
+            <span class="flex-tag">📞 电话</span>
+            <a href="tel:15382359308" class="phone-link-styled">📱 153-8235-9308</a>
+        </div>
+        <div class="contact-line-item">
+            <span class="flex-tag">💬 微信号（同手机）</span>
+            <button class="copy-mini-btn" id="copyWechatBtn" data-value="15382359308">📋 复制微信号</button>
+        </div>
+        <div class="contact-line-item">
+            <span>⏰ 营业时间</span>
+            <span style="font-weight:500;">周一至周日 9:00-21:00</span>
+        </div>
+        <div class="contact-line-item">
+            <span>📱 小红书/抖音</span>
+            <span>@禾家宠物生活</span>
+        </div>
+        <div class="contact-line-item">
+            <span>🚗 接送服务</span>
+            <span>2公里内免费，超出8元/公里</span>
+        </div>
+        <div style="display: flex; justify-content: center; margin: 18px 0 8px;">
+            <img id="wechatQrImg" class="qr-img-hover" style="width: 130px; height: 130px; object-fit: contain; border-radius: 24px; background: #FFF2E6; padding: 6px; box-shadow: var(--shadow-soft);" 
+                 src="https://img.cdn1.vip/i/6a1bddd6cb770_1780211158.png"
+                 alt="微信二维码">
+        </div>
+        <p style="text-align: center; font-size: 0.75rem; margin-top: 0px;">🔹 添加好友备注“宠物寄养” 秒通过 🔹</p>
+    </div>
+    <footer>🐾 禾家宠物 · 用心陪伴每一位毛孩子 🐾 <br> © 2026 温暖守候</footer>
+</div>
+
+<!-- 底部固定栏 -->
+<div class="bottom-bar">
+    <a href="tel:15382359308" class="bottom-btn">📞 电话咨询</a>
+    <button id="wechatBottomBtn" class="bottom-btn bottom-btn-primary">💬 添加微信</button>
+</div>
+
+<!-- 地图选择模态窗 -->
+<div id="mapSelectorModal" class="map-modal-mask">
+    <div class="map-modal-card">
+        <div class="map-modal-title">📍 选择导航应用</div>
+        <div class="map-option" data-map="apple"><span>🍎</span> 苹果地图 (Apple Map)</div>
+        <div class="map-option" data-map="gaode"><span>🗺️</span> 高德地图</div>
+        <div class="map-option" data-map="baidu"><span>🐻</span> 百度地图</div>
+        <div class="map-option" data-map="google"><span>🌐</span> 谷歌地图</div>
+        <button class="close-map-btn" id="closeMapModal">取 消</button>
+    </div>
+</div>
+
+<!-- 图片预览流流畅模态框 -->
+<div id="imageViewer" class="image-viewer-mask">
+    <div class="viewer-card">
+        <button class="close-viewer" id="closeImageViewer">✕</button>
+        <img id="viewerImage" class="viewer-img" alt="环境实拍">
+        <div class="viewer-footer"><span id="viewerTitle" class="viewer-title"></span></div>
+    </div>
+</div>
+
+<div id="toastMsg" class="custom-toast"></div>
+
+<script>
+    // 图片内存缓存：二次点击直接秒开
+    const imgCache = new Map();
+
+    // 图片地址映射（仅存地址，页面初始不加载图片）
+    const facilityImageMap = {
+        "宽敞客厅": { url: "https://free.boltp.com/2026/06/01/6a1d75d06e2c4.webp", label: "🏡 宽敞客厅 · 毛孩子自由奔跑" },
+        "独立休息室": { url: "https://free.boltp.com/2026/06/01/6a1d75cbc38b2.webp", label: "🛏️ 独立休息室 · 安静私密小窝" },
+        "24h空调+净化器": { url: "https://free.boltp.com/2026/06/01/6a1d76e194d42.webp", label: "❄️ 全天空调+空气净化器 · 恒温洁净" },
+        "阳光晒太阳区": { url: "https://free.boltp.com/2026/06/01/6a1d75d0d83df.webp", label: "☀️ 阳光晒太阳区 · 惬意日光浴" },
+        "猫爬架/玩具": { url: "https://free.boltp.com/2026/06/01/6a1d75d1e1efd.webp", label: "🎮 丰富猫爬架玩具 · 释放天性" },
+        "24小时陪护": { url: "https://free.boltp.com/2026/06/01/6a1d774348a24.webp", label: "📹 24小时陪护 · 专人守护" },
+        "每日消毒通风": { url: "https://free.boltp.com/2026/06/01/6a1d764120947.webp", label: "🧹 每日消毒通风 · 卫生健康" },
+        "多房间分区": { url: "https://free.boltp.com/2026/06/01/6a1d7595d94f1.webp", label: "🏞️ 多房间分区 · 互不干扰" }
+    };
+
+    const sceneImageMap = {
+        cat: { url: "https://free.boltp.com/2026/06/01/6a1d6cb501334.webp", title: "🐱 猫咪单间 · 柔软垫子+猫爬架" },
+        dog: { url: "https://free.boltp.com/2026/06/01/6a1d6cb6edf7d.webp", title: "🐕 狗狗活动区 · 围栏+玩具" },
+        living: { url: "https://free.boltp.com/2026/06/01/6a1d6cf9cb925.webp", title: "🛋️ 客厅公区 · 温馨互动" }
+    };
+    
+    // 图片预览DOM
+    const viewerMask = document.getElementById('imageViewer');
+    const viewerImg = document.getElementById('viewerImage');
+    const viewerTitleSpan = document.getElementById('viewerTitle');
+    const closeViewerBtn = document.getElementById('closeImageViewer');
+    
+    // 打开图片弹窗核心方法：懒加载 + 缓存 + 加载状态 + 错误兜底
+    function showImageModal(imgUrl, title) {
+        if (!viewerMask || !viewerImg) return;
+        viewerMask.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // 已有缓存，直接秒显
+        if (imgCache.has(imgUrl)) {
+            viewerImg.src = imgUrl;
+            viewerTitleSpan.textContent = title;
+            return;
+        }
+
+        // 无缓存，显示加载中，开始请求图片
+        viewerImg.src = "";
+        viewerTitleSpan.textContent = "⏳ 图片加载中...";
+        const tempImg = new Image();
+        tempImg.src = imgUrl;
+
+        // 加载成功：存入缓存并展示
+        tempImg.onload = function() {
+            imgCache.set(imgUrl, true);
+            viewerImg.src = imgUrl;
+            viewerTitleSpan.textContent = title || '禾家宠物 · 温暖环境';
+        };
+
+        // 加载失败兜底提示
+        tempImg.onerror = function() {
+            viewerTitleSpan.textContent = "❌ 图片加载失败，请稍后重试";
+        };
+    }
+    
+    // 关闭图片弹窗
+    function hideImageModal() {
+        if (viewerMask) viewerMask.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // 关闭按钮 & 点击蒙层关闭
+    if (closeViewerBtn) closeViewerBtn.addEventListener('click', hideImageModal);
+    if (viewerMask) viewerMask.addEventListener('click', (e) => {
+        if (e.target === viewerMask) hideImageModal();
+    });
+    
+    // Toast 提示
+    function showToast(message, duration = 1800) {
+        const toast = document.getElementById('toastMsg');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), duration);
+    }
+    
+    // 复制文本通用方法
+    function copyText(text, successMsg) {
+        if (!navigator.clipboard) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            showToast(successMsg);
+            return;
+        }
+        navigator.clipboard.writeText(text)
+            .then(() => showToast(successMsg))
+            .catch(() => showToast("手动复制: " + text));
+    }
+    
+    // 复制微信号绑定
+    document.getElementById("copyWechatBtn")?.addEventListener("click", () => {
+        copyText("15382359308", "✅ 微信号已复制，打开微信添加～");
+    });
+    document.getElementById("wechatBottomBtn")?.addEventListener("click", () => {
+        copyText("15382359308", "🐾 微信同号已复制，欢迎咨询～");
+    });
+    document.getElementById("wechatQrImg")?.addEventListener("click", () => {
+        showToast("长按识别或保存二维码添加微信", 1500);
+    });
+
+    // 环境设施点击 - 事件委托
+    const facilityGrid = document.getElementById('facilityGrid');
+    facilityGrid.addEventListener('click', function(e) {
+        const item = e.target.closest('.facility-item');
+        if (!item) return;
+        const rawText = item.innerText.trim();
+        let matchedKey = null;
+        for (let key in facilityImageMap) {
+            if (rawText.includes(key)) {
+                matchedKey = key;
+                break;
+            }
+        }
+        if (matchedKey) {
+            const imgData = facilityImageMap[matchedKey];
+            showImageModal(imgData.url, imgData.label);
+        }
+    });
+
+    // 实拍卡片点击 - 事件委托
+    const photoShowArea = document.getElementById('photoShowArea');
+    photoShowArea.addEventListener('click', function(e) {
+        const card = e.target.closest('.photo-card');
+        if (!card) return;
+        const sceneType = card.getAttribute('data-scene');
+        if (sceneType && sceneImageMap[sceneType]) {
+            const { url, title } = sceneImageMap[sceneType];
+            showImageModal(url, title);
+        }
+    });
+    
+    // 地图导航逻辑（保留原有功能）
+    const modal = document.getElementById('mapSelectorModal');
+    const openBtn = document.getElementById('openMapSelectorBtn');
+    const closeModal = document.getElementById('closeMapModal');
+    const address = "杭州萧山天润中心二幢301高层";
+    const encodedAddress = encodeURIComponent(address);
+
+    function openMap(mapType) {
+        let url = '';
+        if (mapType === 'apple') url = `http://maps.apple.com/?q=${encodedAddress}`;
+        else if (mapType === 'gaode') {
+            if (/iphone|ipad|ipod/i.test(navigator.userAgent)) url = `iosamap://poi?sourceApplication=禾家宠物&name=${encodedAddress}&dev=0`;
+            else if (/android/i.test(navigator.userAgent)) url = `androidamap://poi?sourceApplication=禾家宠物&keywords=${encodedAddress}`;
+            else url = `https://uri.amap.com/search?keyword=${encodedAddress}`;
+        } else if (mapType === 'baidu') {
+            if (/iphone|ipad|ipod/i.test(navigator.userAgent)) url = `baidumap://map/geocoder?address=${encodedAddress}&src=ios.禾家宠物`;
+            else if (/android/i.test(navigator.userAgent)) url = `baidumap://map/geocoder?address=${encodedAddress}&src=android.禾家宠物`;
+            else url = `https://api.map.baidu.com/geocoder?address=${address}&output=html`;
+        } else if (mapType === 'google') url = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+        window.location.href = url;
+        setTimeout(() => showToast(`请确保已安装对应地图应用`, 2500), 800);
+    }
+
+    if (openBtn && modal) {
+        openBtn.addEventListener('click', () => modal.classList.add('active'));
+        closeModal?.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+        document.querySelectorAll('.map-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                const mapVal = opt.getAttribute('data-map');
+                if (mapVal) {
+                    openMap(mapVal);
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>
